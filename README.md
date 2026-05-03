@@ -1,6 +1,6 @@
 Проект для изучения основ инженерии данных: 
 - ETL-процессы; 
-- работа с API/SOAP (BeautifulSoup); 
+- работа с API/SOAP (zeep + BeautifulSoup); 
 - оркестрация (Apache Airflow);
 - взаимодействие с базами данных (PostgreSQL).
 1. currency_dag.py - загрузка справочника валют в БД.
