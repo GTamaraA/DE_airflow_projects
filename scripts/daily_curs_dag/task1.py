@@ -1,16 +1,13 @@
-from zeep import Client, helpers
-import datetime as dt
-import xml.etree.ElementTree as ET
-from bs4 import BeautifulSoup
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from models import Base, valsFull
 import logging
 from dotenv import load_dotenv
 import os
 import argparse
-import pendulum
-from datetime import datetime
+from zeep import Client
+import datetime as dt
+from bs4 import BeautifulSoup
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base, valsFull
 
 load_dotenv()
 
@@ -26,7 +23,7 @@ logging.info('Обработка входящей даты...')
 parser = argparse.ArgumentParser()
 parser.add_argument('--date')
 args = parser.parse_args()
-load_date = datetime.strptime(args.date, '%Y-%m-%d')
+load_date = dt.datetime.strptime(args.date, '%Y-%m-%d')
 
 logging.info(f'Обработка данных за {load_date}...')
 
@@ -73,7 +70,7 @@ def extract_n_load_valsFull(engine, logicaldate):
     postgres_session.bulk_insert_mappings(valsFull, data)
     postgres_session.commit()
     postgres_session.close()
-    logging.info('Загрузка данных в БД выполнена! ✅ ')
+    logging.info('Загрузка данных в БД выполнена! ✅')
 
 engine = db_init()
 extract_n_load_valsFull(engine=engine, logicaldate=load_date)
